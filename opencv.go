@@ -6,7 +6,7 @@ import (
 	"image"
 	"io"
 
-	// 必须
+	// must
 	_ "image/jpeg"
 	_ "image/png"
 
@@ -17,7 +17,7 @@ const (
 	e = 1E9
 )
 
-// Template 模版
+// Template of match
 type Template struct {
 	template gocv.Mat
 	sill     float32
