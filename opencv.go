@@ -6,6 +6,8 @@ import (
 	"image"
 	"io"
 
+	"github.com/sirupsen/logrus"
+
 	// must
 	_ "image/jpeg"
 	_ "image/png"
@@ -55,9 +57,11 @@ func (t Template) Match(img gocv.Mat) (bool, error) {
 	m := gocv.NewMat()
 	gocv.MatchTemplate(img, t.template, &result, gocv.TmCcoeffNormed, m)
 	m.Close()
-	_, max, _, _ := gocv.MinMaxLoc(result)
-	max = max / e
-	return max < t.sill, err
+	min, max, _, _ := gocv.MinMaxLoc(result)
+	// fmt.Println(min, max, max/e, t.sill, max > t.sill)
+	// max = max / e
+	logrus.Infof("min:%.5f max:%.5f sill:%.5f, matched:%v", min, max, t.sill, max > t.sill)
+	return max > t.sill, err
 }
 
 // Close mat
@@ -101,6 +105,7 @@ func ImageMatch(template, target string, sill float32) (bool, error) {
 	gocv.MatchTemplate(imgSence, imgTemplate, &result, gocv.TmSqdiff, m)
 	m.Close()
 	_, max, _, _ := gocv.MinMaxLoc(result)
-	max = max / (e)
-	return max < sill, nil
+	fmt.Println(max, max/(e), sill, (max/e) < sill)
+	max = max / e
+	return max > sill, nil
 }

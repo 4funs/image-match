@@ -26,7 +26,7 @@ func TestImageMatch(t *testing.T) {
 			args: args{
 				template: "image/wechat_moment_group.jpg",
 				target:   "image/wechat_moment.jpg",
-				sill:     1,
+				sill:     0.05,
 			},
 			want:    true,
 			wantErr: false,
@@ -36,7 +36,7 @@ func TestImageMatch(t *testing.T) {
 			args: args{
 				target:   "image/wechat_moment_group.jpg",
 				template: "image/wechat_moment.jpg",
-				sill:     1,
+				sill:     0.05,
 			},
 			want:    true,
 			wantErr: false,
@@ -45,7 +45,7 @@ func TestImageMatch(t *testing.T) {
 			name: "not exist",
 			args: args{
 				template: "image/wechat_moment.jpg",
-				sill:     1,
+				sill:     0.05,
 			},
 			want:    false,
 			wantErr: true,
@@ -54,7 +54,7 @@ func TestImageMatch(t *testing.T) {
 			name: "not exist 2",
 			args: args{
 				target: "image/wechat_moment.jpg",
-				sill:   1,
+				sill:   0.05,
 			},
 			want:    false,
 			wantErr: true,
@@ -62,9 +62,9 @@ func TestImageMatch(t *testing.T) {
 		{
 			name: "not match",
 			args: args{
-				template: "image/wechat_moment.jpg",
-				target:   "image/golang.jpeg",
-				sill:     1,
+				template: "image/wechat_moment_group.jpg",
+				target:   "image/fx20190601194957803pu9w2bqt.jpg",
+				sill:     0.05,
 			},
 			want:    false,
 			wantErr: false,
